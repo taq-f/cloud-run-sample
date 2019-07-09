@@ -1,29 +1,27 @@
 # cloud-run-example
 
-## Project setup
+## Preparation
+
+Create a project (for example, `cloud-run-example`).
+
+## Build
+
+Modify `cloud-build.yml` and set the project name (`cloud-run-example`) and container name (`cloud-run-container`).
+
+Then use gcloud tool to build.
+
 ```
-npm install
+gcloud builds submit --project "[your project, eg. cloud-run-example]" --config=./cloud-build.yml
 ```
 
-### Compiles and hot-reloads for development
+Make sure the container open port **8080**.
+
+You can see `cloud-run-container` in Container Registry section in GCP web UI.
+
+## Deploy
+
 ```
-npm run serve
+gcloud beta run deploy cloud-run-example --region us-central1 --allow-unauthenticated --project "cloud-run-example" --image gcr.io/cloud-run-example/cloud-run-container
 ```
 
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Run your tests
-```
-npm run test
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+Url will be provided when the container is successfully deployed.
